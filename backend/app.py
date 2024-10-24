@@ -2,8 +2,7 @@ from flask import Flask, jsonify, request, send_file # type: ignore
 from flask_cors import CORS # type: ignore
 from scipy.integrate import quad # type: ignore
 import numpy as np # type: ignore
-from numpy import pi, sin, cos, tan # type: ignore
-# from numpy import pi, sin, cos, tan # type: ignore
+from numpy import pi, sin, cos, tan, arcsin, arccos, arctan, log # type: ignore
 import matplotlib.pyplot as plt # type: ignore
 import warnings
 warnings.filterwarnings("ignore")
@@ -61,14 +60,13 @@ def Ef(f, T):
 
 def graficar(t, f):
     plt.style.use("seaborn-v0_8-whitegrid")
-    figura = plt.figure(figsize = (15, 5)) #Crea una figura con tamaño de 15 * 5.
-    axes = plt.axes()
-
-    plt.plot(t, np.vectorize(f)(t)) # Se gráfica la función de onda cuadrada.
-    plt.title("Función 1") #Coloca el titulo a la figura.
-    plt.xlabel("t") #Coloca un titulo a cada uno de los ejes.
+    plt.figure(figsize = (15, 5))
+    plt.axes()
+    plt.plot(t, np.vectorize(f)(t))
+    plt.title("Serie de Fourier Trigonométrica")
+    plt.xlabel("t")
     plt.ylabel("f(t)")
-    plt.show() #Muestra las gráficas en la figura.
+    plt.show()
     
 @app.route('/fourier', methods=['POST'])
 def main():
@@ -76,8 +74,8 @@ def main():
     nFunciones = float(data.get("nFunciones"))
     
     f1 = data.get("f1")
-    r1_a = float(data.get("r1_a"))
-    r1_b = float(data.get("r1_b"))
+    r1_a = float(eval(data.get("r1_a")))
+    r1_b = float(eval(data.get("r1_b")))
 
     N = 10
     
@@ -97,8 +95,8 @@ def main():
             
     elif nFunciones == 2:
         f2 = data.get("f2")
-        r2_a = float(data.get("r2_a"))
-        r2_b = float(data.get("r2_b"))
+        r2_a = float(eval(data.get("r2_a")))
+        r2_b = float(eval(data.get("r2_b")))
 
         @extension_periodica(r1_a, r2_b)
         def funcion2(t):
@@ -117,12 +115,12 @@ def main():
         
     elif nFunciones == 3:
         f2 = data.get("f2")
-        f3 = data.get("f3")
-        r2_a = float(data.get("r2_a"))
-        r2_b = float(data.get("r2_b"))
+        r2_a = float(eval(data.get("r2_a")))
+        r2_b = float(eval(data.get("r2_b")))
 
-        r3_a = float(data.get("r3_a"))
-        r3_b = float(data.get("r3_b"))
+        f3 = data.get("f3")
+        r3_a = float(eval(data.get("r3_a")))
+        r3_b = float(eval(data.get("r3_b")))
 
         @extension_periodica(r1_a, r3_b)
         def funcion3(t):
@@ -144,8 +142,8 @@ def main():
     response = {
         "T": T,
         "a0": a0,
-        "an": an,
-        "bn": bn
+        "an": sum(an),
+        "bn": sum(bn)
     }    
             
     return jsonify(response)

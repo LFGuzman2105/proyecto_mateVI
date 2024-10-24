@@ -1,50 +1,93 @@
-<div>
-    <select name="nFunciones" id="nFunciones" [(ngModel)]="nFunciones">
-        <option value=1>1</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-    </select>
+<div style="margin: 20px;">
+    <div style="display: flex; gap: 10px;">
+        <label for="">Cantidad de funciones:</label>
+        <select name="nFunciones" id="nFunciones" [(ngModel)]="nFunciones" style="width: 50px;">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+        </select>
+    </div>
 
     <br>
     <br>
 
-    @if (nFunciones == 1) {
-        <input type="text" name="f1" id="f1" [(ngModel)]="f1">
-        <input type="number" name="r1_a" id="r1_a" [(ngModel)]="r1_a">
-        <input type="number" name="r1_b" id="r1_b" [(ngModel)]="r1_b">
-    }
-    @else if (nFunciones == 2) {
-        <input type="text" name="f1" id="f1" [(ngModel)]="f1">
-        <input type="number" name="r1_a" id="r1_a" [(ngModel)]="r1_a">
-        <input type="number" name="r1_b" id="r1_b" [(ngModel)]="r1_b">
+    <div>
+        @if (nFunciones == 1) {
+            <table>
+                <thead>
+                    <tr>
+                        <th>f(t)</th>
+                        <th>Rango a</th>
+                        <th>Rango b</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="f1" id="f1" [(ngModel)]="f1"></td>
+                        <td><input type="text" name="r1_a" id="r1_a" [(ngModel)]="r1_a"></td>
+                        <td><input type="text" name="r1_b" id="r1_b" [(ngModel)]="r1_b"></td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        @else if (nFunciones == 2) {
+            <table>
+                <thead>
+                    <tr>
+                        <th>f(t)</th>
+                        <th>Rango a</th>
+                        <th>Rango b</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="f1" id="f1" [(ngModel)]="f1"></td>
+                        <td><input type="text" name="r1_a" id="r1_a" [(ngModel)]="r1_a"></td>
+                        <td><input type="text" name="r1_b" id="r1_b" [(ngModel)]="r1_b"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="f2" id="f2" [(ngModel)]="f2"></td>
+                        <td><input type="text" name="r2_a" id="r2_a" [(ngModel)]="r2_a"></td>
+                        <td><input type="text" name="r2_b" id="r2_b" [(ngModel)]="r2_b"></td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        @else {
+            <table>
+                <thead>
+                    <tr>
+                        <th>f(t)</th>
+                        <th>Rango a</th>
+                        <th>Rango b</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="f1" id="f1" [(ngModel)]="f1"></td>
+                        <td><input type="text" name="r1_a" id="r1_a" [(ngModel)]="r1_a"></td>
+                        <td><input type="text" name="r1_b" id="r1_b" [(ngModel)]="r1_b"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="f2" id="f2" [(ngModel)]="f2"></td>
+                        <td><input type="text" name="r2_a" id="r2_a" [(ngModel)]="r2_a"></td>
+                        <td><input type="text" name="r2_b" id="r2_b" [(ngModel)]="r2_b"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="f3" id="f3" [(ngModel)]="f3"></td>
+                        <td><input type="text" name="r3_a" id="r3_a" [(ngModel)]="r3_a"></td>
+                        <td><input type="text" name="r3_b" id="r3_b" [(ngModel)]="r3_b"></td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
 
-        <br>
-        <br>
+    <br>
+    <br>
 
-        <input type="text" name="f2" id="f2" [(ngModel)]="f2">
-        <input type="number" name="r2_a" id="r2_a" [(ngModel)]="r2_a">
-        <input type="number" name="r2_b" id="r2_b" [(ngModel)]="r2_b">
-    }
-    @else {
-        <input type="text" name="f1" id="f1" [(ngModel)]="f1">
-        <input type="number" name="r1_a" id="r1_a" [(ngModel)]="r1_a">
-        <input type="number" name="r1_b" id="r1_b" [(ngModel)]="r1_b">
-
-        <br>
-        <br>
-
-        <input type="text" name="f2" id="f2" [(ngModel)]="f2">
-        <input type="number" name="r2_a" id="r2_a" [(ngModel)]="r2_a">
-        <input type="number" name="r2_b" id="r2_b" [(ngModel)]="r2_b">
-
-        <br>
-        <br>
-
-        <input type="text" name="f3" id="f3" [(ngModel)]="f3">
-        <input type="number" name="r3_a" id="r3_a" [(ngModel)]="r3_a">
-        <input type="number" name="r3_b" id="r3_b" [(ngModel)]="r3_b">
-    }
-    
-    <button (click)="mostrar()">Mostrar</button>
-    <button (click)="limpiar()">Limpiar</button>
+    <div style="display: flex; gap: 10px;">
+        <button (click)="mostrar()">Mostrar</button>
+        <button (click)="limpiar()">Limpiar</button>
+    </div>
 </div>
