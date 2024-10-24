@@ -1,0 +1,50 @@
+<div>
+    <select name="nFunciones" id="nFunciones" [(ngModel)]="nFunciones">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+    </select>
+
+    <br>
+    <br>
+
+    @if (nFunciones == 1) {
+        <input type="text" name="f1" id="f1" [(ngModel)]="f1">
+        <input type="number" name="r1_a" id="r1_a" [(ngModel)]="r1_a">
+        <input type="number" name="r1_b" id="r1_b" [(ngModel)]="r1_b">
+    }
+    @else if (nFunciones == 2) {
+        <input type="text" name="f1" id="f1" [(ngModel)]="f1">
+        <input type="number" name="r1_a" id="r1_a" [(ngModel)]="r1_a">
+        <input type="number" name="r1_b" id="r1_b" [(ngModel)]="r1_b">
+
+        <br>
+        <br>
+
+        <input type="text" name="f2" id="f2" [(ngModel)]="f2">
+        <input type="number" name="r2_a" id="r2_a" [(ngModel)]="r2_a">
+        <input type="number" name="r2_b" id="r2_b" [(ngModel)]="r2_b">
+    }
+    @else {
+        <input type="text" name="f1" id="f1" [(ngModel)]="f1">
+        <input type="number" name="r1_a" id="r1_a" [(ngModel)]="r1_a">
+        <input type="number" name="r1_b" id="r1_b" [(ngModel)]="r1_b">
+
+        <br>
+        <br>
+
+        <input type="text" name="f2" id="f2" [(ngModel)]="f2">
+        <input type="number" name="r2_a" id="r2_a" [(ngModel)]="r2_a">
+        <input type="number" name="r2_b" id="r2_b" [(ngModel)]="r2_b">
+
+        <br>
+        <br>
+
+        <input type="text" name="f3" id="f3" [(ngModel)]="f3">
+        <input type="number" name="r3_a" id="r3_a" [(ngModel)]="r3_a">
+        <input type="number" name="r3_b" id="r3_b" [(ngModel)]="r3_b">
+    }
+    
+    <button (click)="mostrar()">Mostrar</button>
+    <button (click)="limpiar()">Limpiar</button>
+</div>
