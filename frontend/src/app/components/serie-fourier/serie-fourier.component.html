@@ -1,93 +1,135 @@
-<div style="margin: 20px;">
-    <div style="display: flex; gap: 10px;">
-        <label for="">Cantidad de funciones:</label>
-        <select name="nFunciones" id="nFunciones" [(ngModel)]="nFunciones" style="width: 50px;">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
-        </select>
-    </div>
+<mat-toolbar color="primary">
+    <span>Serie de Fourier Truncada y FFT</span>
+    <span style="flex: 1;"></span>
+    <img src="assets/logo.png" alt="Logo" style="height: 50px; width: auto; margin-right: 10px;">
+</mat-toolbar>
 
-    <br>
-    <br>
+<mat-sidenav-container class="container">
+    <mat-sidenav #sidenav mode="side" opened="true" position="start" class="sidebar">
+        <div class="input-container">
+            <p>Cantidad de funciones a ingresar:</p>
 
-    <div>
-        @if (nFunciones == 1) {
-            <table>
-                <thead>
-                    <tr>
-                        <th>f(t)</th>
-                        <th>Rango a</th>
-                        <th>Rango b</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" name="f1" id="f1" [(ngModel)]="f1"></td>
-                        <td><input type="text" name="r1_a" id="r1_a" [(ngModel)]="r1_a"></td>
-                        <td><input type="text" name="r1_b" id="r1_b" [(ngModel)]="r1_b"></td>
-                    </tr>
-                </tbody>
-            </table>
-        }
-        @else if (nFunciones == 2) {
-            <table>
-                <thead>
-                    <tr>
-                        <th>f(t)</th>
-                        <th>Rango a</th>
-                        <th>Rango b</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" name="f1" id="f1" [(ngModel)]="f1"></td>
-                        <td><input type="text" name="r1_a" id="r1_a" [(ngModel)]="r1_a"></td>
-                        <td><input type="text" name="r1_b" id="r1_b" [(ngModel)]="r1_b"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="f2" id="f2" [(ngModel)]="f2"></td>
-                        <td><input type="text" name="r2_a" id="r2_a" [(ngModel)]="r2_a"></td>
-                        <td><input type="text" name="r2_b" id="r2_b" [(ngModel)]="r2_b"></td>
-                    </tr>
-                </tbody>
-            </table>
-        }
-        @else {
-            <table>
-                <thead>
-                    <tr>
-                        <th>f(t)</th>
-                        <th>Rango a</th>
-                        <th>Rango b</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" name="f1" id="f1" [(ngModel)]="f1"></td>
-                        <td><input type="text" name="r1_a" id="r1_a" [(ngModel)]="r1_a"></td>
-                        <td><input type="text" name="r1_b" id="r1_b" [(ngModel)]="r1_b"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="f2" id="f2" [(ngModel)]="f2"></td>
-                        <td><input type="text" name="r2_a" id="r2_a" [(ngModel)]="r2_a"></td>
-                        <td><input type="text" name="r2_b" id="r2_b" [(ngModel)]="r2_b"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="f3" id="f3" [(ngModel)]="f3"></td>
-                        <td><input type="text" name="r3_a" id="r3_a" [(ngModel)]="r3_a"></td>
-                        <td><input type="text" name="r3_b" id="r3_b" [(ngModel)]="r3_b"></td>
-                    </tr>
-                </tbody>
-            </table>
-        }
-    </div>
+            <mat-radio-group aria-label="nFunciones" [(ngModel)]="nFunciones">
+                <mat-radio-button value="1">1</mat-radio-button>
+                <mat-radio-button value="2">2</mat-radio-button>
+                <mat-radio-button value="3">3</mat-radio-button>
+            </mat-radio-group>
 
-    <br>
-    <br>
+            <br>
+            <p>Ingrese la función f(t) y su rango:</p>
 
-    <div style="display: flex; gap: 10px;">
-        <button (click)="mostrar()">Mostrar</button>
-        <button (click)="limpiar()">Limpiar</button>
-    </div>
-</div>
+            @if (nFunciones == "1") {
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                    <mat-form-field>
+                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
+                    </mat-form-field>
+                </div>
+            }
+            @else if (nFunciones == "2") {
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                    <mat-form-field>
+                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
+                    </mat-form-field>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                    <mat-form-field>
+                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f2">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="a:" type="text" [(ngModel)]="r2_a">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="b:" type="text" [(ngModel)]="r2_b">
+                    </mat-form-field>
+                </div>
+            }
+            @else {
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                    <mat-form-field>
+                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
+                    </mat-form-field>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                    <mat-form-field>
+                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f2">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="a:" type="text" [(ngModel)]="r2_a">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="b:" type="text" [(ngModel)]="r2_b">
+                    </mat-form-field>
+                </div>
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                    <mat-form-field>
+                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f3">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="a:" type="text" [(ngModel)]="r3_a">
+                    </mat-form-field>
+                    <mat-form-field style="width: 20%;">
+                        <input matInput placeholder="b:" type="text" [(ngModel)]="r3_b">
+                    </mat-form-field>
+                </div>
+            }
+
+            <div class="button-group">
+                <button mat-raised-button (click)="mostrar()">Calcular</button>
+                <button mat-raised-button color="warn" (click)="limpiar()">Resetear</button>
+            </div>
+
+            <br>
+            <button mat-raised-button color="primary" routerLink="/home">Creditos</button>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div style="display: flex;">
+            <div style="flex: 1;"> 
+                <div class="input-container">
+                    @if (data) {
+                        <div style="display: flex; gap: 10px;">
+                            <h3 style="font-weight: bolder;">Periodo: </h3>
+                            <h3>{{ data.T }}</h3>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <h3 style="font-weight: bolder;">a0: </h3>
+                            <h3>{{ data.a0 }}</h3>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <h3 style="font-weight: bolder;">N: </h3>
+                            <h3>{{ data.N }}</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div style="flex: 1.5;">
+                <div>
+                    @if (imagenGrafica) {
+                        <img src="{{ imagenGrafica }}" alt="Gráfica" style="width: 100%;">
+                    }
+                </div>
+
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
