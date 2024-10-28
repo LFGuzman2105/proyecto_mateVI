@@ -130,7 +130,7 @@ def main():
         serie_fourier = fourier_approximation(funcion2, T, (2 * N) + 1)
         imagenGrafica = graficar(valores_t, serie_fourier)
         
-    elif nFunciones == 3:
+    else:
         f2 = data.get("f2")
         r2_a = float(eval(data.get("r2_a")))
         r2_b = float(eval(data.get("r2_b")))
@@ -162,14 +162,21 @@ def main():
         serie_fourier = fourier_approximation(funcion3, T, (2 * N) + 1)
         imagenGrafica = graficar(valores_t, serie_fourier)
 
+    suma_an = sum(an)
+    suma_bn = sum(bn)
+    W = (2 * np.pi) / T
+    ecuacionSerieFourier = "f(t) = " +str(a0)+ " + Σ_(n = 1 to " +str(N)+ ") (" +str(suma_an)+ " * cos(n * " +str(W)+ " * t) + (" +str(suma_bn)+ " * sin(n * " +str(W)+" * t))"
+
     response = jsonify({
         "T": T,
         "a0": a0,
         "an": an,
         "bn": bn,
+        "suma_an": suma_an,
+        "suma_bn": suma_bn,
         "imagenGrafica": imagenGrafica,
         "N": N,
-        "ecuacionSerieFourier": "",
+        "ecuacionSerieFourier": ecuacionSerieFourier
     })
             
     return make_response(response)
