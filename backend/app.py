@@ -48,6 +48,28 @@ def fourier_series(f, T, N):
 
     return a0, an, bn
 
+def Ef(f, T):
+    integrando = lambda t: f(t)**2
+    E_f = quad(integrando, 0, T)[0]
+
+    return E_f
+
+def ICE(f, T, Ef):
+    a0 = fourier_a0(f, T)
+    suma = 0
+    i = 1
+
+    while(True):
+        an = fourier_an(f, T, i)
+        bn = fourier_bn(f, T, i)
+        suma += (an**2) + (bn**2)
+        ICE = Ef - (((a0**2) * T) + ((T / 2) * suma))
+
+        if ICE <= 0.02 * Ef:
+            return i
+        else:
+            i += 1
+
 def fourier_approximation(f, T, N):
     a0, an, bn = fourier_series(f, T, N)
     W = (2 * np.pi) / T
@@ -72,12 +94,6 @@ def graficar(t, f):
     
     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
     return img_base64
-
-def Ef(f, T):
-    integrando = lambda t: f(t)**2
-    E_f = quad(integrando, 0, T)[0]
-
-    return E_f
     
 @app.route('/serie_fourier', methods=['POST'])
 def main():
@@ -88,7 +104,9 @@ def main():
     r1_a = float(eval(data.get("r1_a")))
     r1_b = float(eval(data.get("r1_b")))
 
-    N = 10
+    #N = 3
+    #N = 5
+    #N = 10
     
     if nFunciones == 1:
         @extension_periodica(r1_a, r1_b)
@@ -101,6 +119,8 @@ def main():
                 return 0
             
         T = periodo(r1_a, r1_b)
+        ef = Ef(funcion1, T)
+        N = ICE(funcion1, T, ef)
         a0, an, bn = fourier_series(funcion1, T, N)
         valores_t = np.linspace(r1_a, r1_b, 1000)
         serie_fourier = fourier_approximation(funcion1, T, (2 * N) + 1)
@@ -125,6 +145,8 @@ def main():
                 return 0
         
         T = periodo(r1_a, r2_b)
+        ef = Ef(funcion2, T)
+        N = ICE(funcion2, T, ef)
         a0, an, bn = fourier_series(funcion2, T, N)
         valores_t = np.linspace(r1_a, r2_b, 1000)
         serie_fourier = fourier_approximation(funcion2, T, (2 * N) + 1)
@@ -157,6 +179,8 @@ def main():
                 return 0
         
         T = periodo(r1_a, r3_b)
+        ef = Ef(funcion3, T)
+        N = ICE(funcion3, T, ef)
         valores_t = np.linspace(r1_a, r3_b, 1000)
         a0, an, bn = fourier_series(funcion3, T, N)
         serie_fourier = fourier_approximation(funcion3, T, (2 * N) + 1)
