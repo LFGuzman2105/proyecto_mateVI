@@ -14,8 +14,17 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-serie-fourier',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, MatToolbarModule, MatRadioModule, MatSidenavModule, MatFormFieldModule, 
-            MatInputModule, MatButtonModule, RouterModule, MatTableModule],
+  imports: [
+    FormsModule, 
+    HttpClientModule, 
+    MatToolbarModule, 
+    MatRadioModule, 
+    MatSidenavModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatButtonModule, 
+    RouterModule, 
+    MatTableModule],
   templateUrl: './serie-fourier.component.html',
   styleUrl: './serie-fourier.component.scss',
   providers: [FourierService]

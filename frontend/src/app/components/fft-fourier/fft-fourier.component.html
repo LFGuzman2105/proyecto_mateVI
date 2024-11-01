@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="fft">
+        <form [formGroup]="imageForm" (ngSubmit)="onSubmit()" action="">
+            <div>
+                <div>
+                    <label for="fileUpload">Seleccione la imagen que quiere procesar</label>
+                </div>
+                <input type="file" (change)="onFileSelect($event)" >
+            </div>
+            <div class="button-group">
+                <button mat-raised-button type="submit" >Procesar Imagen</button>
+                <button mat-raised-button color="warn">Resetear</button>
+            </div>
+        </form>
+    </div>
+</div>

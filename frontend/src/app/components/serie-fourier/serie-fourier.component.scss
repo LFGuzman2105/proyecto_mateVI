@@ -3,7 +3,7 @@ mat-toolbar {
 }
 
 .container {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 112px);
     background-color: gray;
 }
 
@@ -30,4 +30,21 @@ mat-sidenav {
 .button-group button {
     margin-right: 10px;
     margin-top: 20px;
+}
+
+.serie-fourier {
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 3px solid #e7e6e6;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: currentColor;
 }
