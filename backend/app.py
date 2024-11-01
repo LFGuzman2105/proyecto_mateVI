@@ -181,5 +181,10 @@ def main():
             
     return make_response(response)
 
+@app.route('/fft', methods=['POST'])
+def fft():
+    data = request.get_json()
+    return make_response(data)
+
 if __name__ == '__main__':
     app.run(debug=True)

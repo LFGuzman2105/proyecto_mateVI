@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FourierService } from '../../services/fourier.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-fft-fourier',
@@ -13,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule, 
     ReactiveFormsModule,
     MatButtonModule, 
+    HttpClientModule
   ],
   templateUrl: './fft-fourier.component.html',
   styleUrl: './fft-fourier.component.scss'
@@ -22,7 +26,8 @@ export class FftFourierComponent {
   selectedFile: File | null = null;
 
   constructor(
-    private dataImage: FormBuilder
+    private dataImage: FormBuilder,
+    private fourierService: FourierService
   ) {
     this.imageForm = this.dataImage.group({})
   }
@@ -40,6 +45,12 @@ export class FftFourierComponent {
       return;
     }
 
-    console.log(this.selectedFile);
+    const formData = {
+      file: this.selectedFile,
+    }
+
+    this.fourierService.sendFftData(formData).subscribe(response => {
+      console.log(response);
+    });
   }
 }

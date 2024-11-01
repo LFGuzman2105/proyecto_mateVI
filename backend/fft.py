@@ -49,7 +49,7 @@ def apply_high_pass_filter(image, cutoff_frequency):
     return filtered_image
 
 # Load the original color image
-image_path = r'C:\Users\bhald\Downloads\Proyecto_Series_de_Fourier\img2.png'
+image_path = r'C:\Users\jivan\OneDrive - Universidad Galileo\Mate VI\Proyecto\img2.png'
 image = cv2.imread(image_path)
 
 # Define cutoff frequencies
