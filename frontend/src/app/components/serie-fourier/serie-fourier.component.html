@@ -1,172 +1,172 @@
-<mat-sidenav-container class="container">
-    <mat-sidenav #sidenav mode="side" opened="true" position="start" class="sidebar">
-        <div class="input-container">
-            <p>Cantidad de funciones a ingresar:</p>
+    <mat-sidenav-container class="container">
+        <mat-sidenav #sidenav mode="side" opened="true" position="start" class="sidebar">
+            <div class="input-container">
+                <p>Cantidad de funciones a ingresar:</p>
 
-            <mat-radio-group aria-label="nFunciones" [(ngModel)]="nFunciones">
-                <mat-radio-button value="1">1</mat-radio-button>
-                <mat-radio-button value="2">2</mat-radio-button>
-                <mat-radio-button value="3">3</mat-radio-button>
-            </mat-radio-group>
+                <mat-radio-group aria-label="nFunciones" [(ngModel)]="nFunciones">
+                    <mat-radio-button value="1">1</mat-radio-button>
+                    <mat-radio-button value="2">2</mat-radio-button>
+                    <mat-radio-button value="3">3</mat-radio-button>
+                </mat-radio-group>
 
-            <br>
-            <p>Ingrese la función f(t) y su rango:</p>
+                <br>
+                <p>Ingrese la función f(t) y su rango:</p>
 
-            @if (nFunciones == "1") {
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
-                    <mat-form-field>
-                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
-                    </mat-form-field>
-                </div>
-            }
-            @else if (nFunciones == "2") {
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
-                    <mat-form-field>
-                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
-                    </mat-form-field>
-                </div>
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
-                    <mat-form-field>
-                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f2">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="a:" type="text" [(ngModel)]="r2_a">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="b:" type="text" [(ngModel)]="r2_b">
-                    </mat-form-field>
-                </div>
-            }
-            @else {
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
-                    <mat-form-field>
-                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
-                    </mat-form-field>
-                </div>
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
-                    <mat-form-field>
-                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f2">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="a:" type="text" [(ngModel)]="r2_a">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="b:" type="text" [(ngModel)]="r2_b">
-                    </mat-form-field>
-                </div>
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
-                    <mat-form-field>
-                        <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f3">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="a:" type="text" [(ngModel)]="r3_a">
-                    </mat-form-field>
-                    <mat-form-field style="width: 30%;">
-                        <input matInput placeholder="b:" type="text" [(ngModel)]="r3_b">
-                    </mat-form-field>
-                </div>
-            }
+                @if (nFunciones == "1") {
+                    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <mat-form-field>
+                            <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
+                        </mat-form-field>
+                    </div>
+                }
+                @else if (nFunciones == "2") {
+                    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <mat-form-field>
+                            <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <mat-form-field>
+                            <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f2">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="a:" type="text" [(ngModel)]="r2_a">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="b:" type="text" [(ngModel)]="r2_b">
+                        </mat-form-field>
+                    </div>
+                }
+                @else {
+                    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <mat-form-field>
+                            <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f1">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="a:" type="text" [(ngModel)]="r1_a">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="b:" type="text" [(ngModel)]="r1_b">
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <mat-form-field>
+                            <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f2">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="a:" type="text" [(ngModel)]="r2_a">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="b:" type="text" [(ngModel)]="r2_b">
+                        </mat-form-field>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <mat-form-field>
+                            <input matInput placeholder="Ingrese: f(t)" type="text" [(ngModel)]="f3">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="a:" type="text" [(ngModel)]="r3_a">
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%;">
+                            <input matInput placeholder="b:" type="text" [(ngModel)]="r3_b">
+                        </mat-form-field>
+                    </div>
+                }
 
-            <div class="button-group">
-                <button mat-raised-button (click)="mostrar()" color="primary">Calcular</button>
-                <button mat-raised-button color="warn" (click)="limpiar()">Resetear</button>
+                <div class="button-group">
+                    <button mat-raised-button (click)="mostrar()" color="primary">Calcular</button>
+                    <button mat-raised-button color="warn" (click)="limpiar()">Resetear</button>
+                </div>
+
+                <br>
+                <button mat-raised-button color="primary" routerLink="/home">Creditos</button>
             </div>
+        </mat-sidenav>
 
-            <br>
-            <button mat-raised-button color="primary" routerLink="/home">Creditos</button>
-        </div>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <div style="display: flex;">
-            <div style="flex: 1;"> 
-                <div class="input-container">
-                    @if (data) {
-                        <div class="serie-fourier">
-                            <table mat-table [dataSource]="dataSource" aria-label="" class="mat-elevation-z8">
-                                <ng-container matColumnDef="n">
-                                    <th mat-header-cell *matHeaderCellDef>n</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.n }}</td>
-                                </ng-container>
-    
-                                <ng-container matColumnDef="a0">
-                                    <th mat-header-cell *matHeaderCellDef>a0</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.a0 }}</td> 
-                                </ng-container>
+        <mat-sidenav-content>
+            <div style="display: flex;">
+                <div style="flex: 1;"> 
+                    <div class="input-container">
+                        @if (data) {
+                            <div class="serie-fourier">
+                                <table mat-table [dataSource]="dataSource" aria-label="" class="mat-elevation-z8">
+                                    <ng-container matColumnDef="n">
+                                        <th mat-header-cell *matHeaderCellDef>n</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.n }}</td>
+                                    </ng-container>
         
-                                <ng-container matColumnDef="an">
-                                    <th mat-header-cell *matHeaderCellDef>an</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.an }}</td>
-                                </ng-container>
-        
-                                <ng-container matColumnDef="bn">
-                                    <th mat-header-cell *matHeaderCellDef>bn</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.bn }}</td>
-                                </ng-container>
-        
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-                        </div>
-                    }
-                </div>
-            </div>
-
-            <div style="flex: 1.5;">
-                <div class="input-container">
-                    @if (data) {
-                        <div class="serie-fourier">
-                            <img src="{{ imagenGrafica }}" alt="Gráfica" style="width: 100%;">
-                        </div>
-                        <hr>
-                        <div class="serie-fourier">
-                            <div style="display: flex; gap: 10px;">
-                                <h3 style="font-weight: bolder;">Periodo: </h3>
-                                <h3>{{ data.T }}</h3>
+                                    <ng-container matColumnDef="a0">
+                                        <th mat-header-cell *matHeaderCellDef>a0</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.a0 }}</td> 
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="an">
+                                        <th mat-header-cell *matHeaderCellDef>an</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.an }}</td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="bn">
+                                        <th mat-header-cell *matHeaderCellDef>bn</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.bn }}</td>
+                                    </ng-container>
+            
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
                             </div>
-                            <div style="display: flex; gap: 10px;">
-                                <h3 style="font-weight: bolder;">a0: </h3>
-                                <h3>{{ data.a0 }}</h3>
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <h3 style="font-weight: bolder;">bn: </h3>
-                                <h3>{{ an }}</h3>
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <h3 style="font-weight: bolder;">bn: </h3>
-                                <h3>{{ bn }}</h3>
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <h3 style="font-weight: bolder;">N: </h3>
-                                <h3>{{ data.N }}</h3>
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <h3 style="font-weight: bolder;">Ecuación de la serie de Fourier trigonométrica: </h3>
-                                <h3>{{ data.ecuacionSerieFourier }}</h3>
-                            </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
 
+                <div style="flex: 1.5;">
+                    <div class="input-container">
+                        @if (data) {
+                            <div class="serie-fourier">
+                                <img src="{{ imagenGrafica }}" alt="Gráfica" style="width: 100%;">
+                            </div>
+                            <hr>
+                            <div class="serie-fourier">
+                                <div style="display: flex; gap: 10px;">
+                                    <h3 style="font-weight: bolder;">Periodo: </h3>
+                                    <h3>{{ data.T }}</h3>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <h3 style="font-weight: bolder;">a0: </h3>
+                                    <h3>{{ data.a0 }}</h3>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <h3 style="font-weight: bolder;">bn: </h3>
+                                    <h3>{{ an }}</h3>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <h3 style="font-weight: bolder;">bn: </h3>
+                                    <h3>{{ bn }}</h3>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <h3 style="font-weight: bolder;">N: </h3>
+                                    <h3>{{ data.N }}</h3>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <h3 style="font-weight: bolder;">Ecuación de la serie de Fourier trigonométrica: </h3>
+                                    <h3>{{ data.ecuacionSerieFourier }}</h3>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
