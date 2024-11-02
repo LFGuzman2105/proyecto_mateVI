@@ -6,6 +6,12 @@ import { MatInputModule } from '@angular/material/input';
 import { FourierService } from '../../services/fourier.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Console } from 'console';
+import { MatOption, MatSelect } from '@angular/material/select';
+
+interface Images {
+  value: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-fft-fourier',
@@ -16,41 +22,47 @@ import { Console } from 'console';
     FormsModule, 
     ReactiveFormsModule,
     MatButtonModule, 
-    HttpClientModule
+    HttpClientModule,
+    MatSelect,
+    MatOption,
+    MatFormField,
   ],
   templateUrl: './fft-fourier.component.html',
   styleUrl: './fft-fourier.component.scss'
 })
 export class FftFourierComponent {
-  imageForm: FormGroup = new FormGroup('');
-  selectedFile: File | null = null;
+  selectedimg: string = '';
+  filtered_images: string = '';
+  images: Images[] = [
+    {value: '1', name: 'Imagen 1'},
+    {value: '2', name: 'Imagen 2'},
+    {value: '3', name: 'Imagen 3'},
+    {value: '4', name: 'Imagen 4'},
+    {value: '5', name: 'Imagen Personalizada'},
+  ];
 
   constructor(
-    private dataImage: FormBuilder,
     private fourierService: FourierService
-  ) {
-    this.imageForm = this.dataImage.group({})
-  }
+  ) { }
 
-  onFileSelect(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    if (target.files && target.files.length > 0) {
-      this.selectedFile = target.files[0];
-    }
+  reset() {
+    this.filtered_images = '';
   }
 
   onSubmit(): void {
-    if (!this.selectedFile) {
-      console.error("No file selected");
+    this.filtered_images = '';
+    if (!this.selectedimg) {
+      alert('No ha seleccionado ninguna imagen.') ;
+      console.log(this.selectedimg);
       return;
     }
 
     const formData = {
-      file: this.selectedFile,
+      img: this.selectedimg,
     }
 
     this.fourierService.sendFftData(formData).subscribe(response => {
-      console.log(response);
+      this.filtered_images = 'data:image/png;base64,' + response.imagen_filtrada;
     });
   }
 }

@@ -1,3 +1,4 @@
+from fft import ImageFilter
 from flask import Flask, jsonify, request, send_file, make_response # type: ignore
 from flask_cors import CORS # type: ignore
 from scipy.integrate import quad # type: ignore
@@ -7,6 +8,7 @@ import matplotlib # type: ignore
 matplotlib.use('Agg') # type: ignore
 import matplotlib.pyplot as plt # type: ignore
 import io
+import os
 import base64
 import warnings
 warnings.filterwarnings("ignore")
@@ -18,9 +20,9 @@ def periodo(a, b):
     return b - a
 
 def extension_periodica(a, b):
-  T = periodo(a, b)
+    T = periodo(a, b)
 
-  return lambda f: lambda t: f((t - a) % T + a)
+    return lambda f: lambda t: f((t - a) % T + a)
 
 def fourier_a0(f, T):
     a0 = (1 / T) * quad(f, 0, T)[0]
@@ -207,8 +209,28 @@ def main():
 
 @app.route('/fft', methods=['POST'])
 def fft():
-    data = request.get_json()
-    return make_response(data)
+    try:
+        data = request.get_json()
+        indexImg = int(data.get("img")) - 1
+        
+        # **** CONFIGURAR RUTA PARA IMAGENES ****
+        image_path = os.getcwd()
+        img_names = ['img1.jpeg', 'img2.png', 'img3.jpg', 'img4.jpg', 'custom.jpg']
+        final_path = f"{image_path}/img/{img_names[indexImg]}".replace("\\", "/")
+        
+        cutoff_frequencies = [0.2, 0.1, 0.9]
+
+        # llamar a funcion de filtrado
+        image_filter = ImageFilter(final_path)
+        imagen_filtrada = image_filter.display_filtered_img(cutoff_frequencies)
+        
+        response = jsonify({
+            "imagen_filtrada": imagen_filtrada
+        })
+
+        return make_response(response)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

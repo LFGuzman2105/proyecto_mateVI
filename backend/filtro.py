@@ -1,93 +1,109 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-#Filtro que elimina las altas frecuencias, suavizan las imagenes
-def pasa_bajas(imagen, frecuencia_corte):
-    canales_filtrados = []
-    for canal in cv2.split(imagen):
-        # Transformada de Fourier 2D
-        dft = np.fft.fft2(canal)
-        # Desplazamiento del cero de frecuencia al centro del espectro
-        dft_shift = np.fft.fftshift(dft)
+import io
+import base64
+import warnings
+warnings.filterwarnings("ignore")
 
-        # Crear una máscara de paso bajo
-        filas, columnas = canal.shape
-        centro_filas, centro_columnas = filas // 2, columnas // 2
-        mascara = np.zeros((filas, columnas), np.uint8)
-        radio = int(min(filas, columnas) * frecuencia_corte)
-        cv2.circle(mascara, (centro_columnas, centro_filas), radio, 1, thickness=-1)
+class ImageFilter:
+    def __init__(self, image_path):
+        self.image_path = image_path
+        self.imagen = cv2.imread(image_path)
+        if self.image is None:
+            raise ValueError(f"No se pudo cargar la imagen desde la ruta: {image_path}")
+    
+    #Filtro que elimina las altas frecuencias, suavizan las imagenes
+    def pasa_bajas(self, frec_corte):
+        c_filtrados = []
+        for canal in cv2.split(self.imagen):
+            # Transformada de Fourier 2D
+            dft = np.fft.fft2(canal)
+            # Desplazamiento del cero de frecuencia al centro del espectro
+            dft_shift = np.fft.fftshift(dft)
 
-        # Aplicar la máscara al DFT
-        dft_shift_filtrado = dft_shift * mascara
-        # Deshacer el desplazamiento del cero de frecuencia
-        dft_filtrado = np.fft.ifftshift(dft_shift_filtrado)
-        # Transformada Inversa de Fourier 2D
-        canal_filtrado = np.fft.ifft2(dft_filtrado)
-        # Obtener la magnitud del resultado complejo
-        canal_filtrado = np.abs(canal_filtrado)
-        canales_filtrados.append(canal_filtrado)
+            # Crear una máscara de paso bajo
+            filas, columnas = canal.shape
+            centro_filas, centro_columnas = filas // 2, columnas // 2
+            mascara = np.zeros((filas, columnas), np.uint8)
+            radio = int(min(filas, columnas) * frec_corte)
+            cv2.circle(mascara, (centro_columnas, centro_filas), radio, 1, thickness=-1)
 
-    # Combinar los canales filtrados en una imagen
-    imagen_filtrada = cv2.merge(canales_filtrados)
-    return imagen_filtrada
+            # Aplicar la máscara al DFT
+            dft_shift_filtrado = dft_shift * mascara
+            # Deshacer el desplazamiento del cero de frecuencia
+            dft_filtrado = np.fft.ifftshift(dft_shift_filtrado)
+            # Transformada Inversa de Fourier 2D
+            canal_filtrado = np.fft.ifft2(dft_filtrado)
+            # Obtener la magnitud del resultado complejo
+            canal_filtrado = np.abs(canal_filtrado)
+            c_filtrados.append(canal_filtrado)
 
-#hace que se realce los bordes en las imagenes. 
-def pasa_altas(imagen, frecuencia_corte):
-    canales_filtrados = []
-    for canal in cv2.split(imagen):
-        # Transformada de Fourier 2D
-        dft = np.fft.fft2(canal)
-        # Desplazamiento del cero de frecuencia al centro del espectro
-        dft_shift = np.fft.fftshift(dft)
+        # Combinar los canales filtrados en una imagen
+        imagen_filtrada = cv2.merge(c_filtrados)
+        return imagen_filtrada
 
-        # Crear una máscara de paso alto (invertir la máscara de paso bajo)
-        filas, columnas = canal.shape
-        centro_filas, centro_columnas = filas // 2, columnas // 2
-        mascara = np.ones((filas, columnas), np.uint8)
-        radio = int(min(filas, columnas) * frecuencia_corte)
-        cv2.circle(mascara, (centro_columnas, centro_filas), radio, 0, thickness=-1)
+    #hace que se realce los bordes en las imagenes. 
+    def pasa_altas(self, frec_corte):
+        c_filtrados = []
+        for canal in cv2.split(self.imagen):
+            # Transformada de Fourier 2D
+            dft = np.fft.fft2(canal)
+            # Desplazamiento del cero de frecuencia al centro del espectro
+            dft_shift = np.fft.fftshift(dft)
 
-        # Aplicar la máscara al DFT
-        dft_shift_filtrado = dft_shift * mascara
-        # Deshacer el desplazamiento del cero de frecuencia
-        dft_filtrado = np.fft.ifftshift(dft_shift_filtrado)
-        # Transformada Inversa de Fourier 2D
-        canal_filtrado = np.fft.ifft2(dft_filtrado)
-        # Obtener la magnitud del resultado complejo
-        canal_filtrado = np.abs(canal_filtrado)
-        canales_filtrados.append(canal_filtrado)
+            # Crear una máscara de paso alto (invertir la máscara de paso bajo)
+            filas, columnas = canal.shape
+            centro_filas, centro_columnas = filas // 2, columnas // 2
+            mascara = np.ones((filas, columnas), np.uint8)
+            radio = int(min(filas, columnas) * frec_corte)
+            cv2.circle(mascara, (centro_columnas, centro_filas), radio, 0, thickness=-1)
 
-    # Combinar los canales filtrados en una imagen
-    imagen_filtrada = cv2.merge(canales_filtrados)
-    return imagen_filtrada
+            # Aplicar la máscara al DFT
+            dft_shift_filtrado = dft_shift * mascara
+            # Deshacer el desplazamiento del cero de frecuencia
+            dft_filtrado = np.fft.ifftshift(dft_shift_filtrado)
+            # Transformada Inversa de Fourier 2D
+            canal_filtrado = np.fft.ifft2(dft_filtrado)
+            # Obtener la magnitud del resultado complejo
+            canal_filtrado = np.abs(canal_filtrado)
+            c_filtrados.append(canal_filtrado)
 
-# Cargar la imagen original en color
-ruta_imagen = r'C:\Users\bhald\Downloads\Proyecto_Series_de_Fourier\img2.png'
-imagen = cv2.imread(ruta_imagen)
+        # Combinar los canales filtrados en una imagen
+        imagen_filtrada = cv2.merge(c_filtrados)
+        return imagen_filtrada
 
-#Iteracion de frecuencias. 
-frecuencias_corte = [0.2, 0.1, 0.9]
-imagenes_pasa_bajas = [pasa_bajas(imagen, f) for f in frecuencias_corte]
-imagenes_pasa_altas = [pasa_altas(imagen, f) for f in frecuencias_corte]
+    def display_filtered_img(self, frec_corte):
+        # Aplicar filtros de paso bajo y paso alto
+        imgs_pasa_bajas = [self.pasa_bajas(self.imagen, f) for f in frec_corte]
+        imgs_pasa_altas = [self.pasa_altas(self.imagen, f) for f in frec_corte]
 
-plt.figure(figsize=(18, 12))
+        plt.figure(figsize=(18, 12))
 
-plt.subplot(3, 4, 1)
-plt.title("Imagen Original")
-plt.imshow(cv2.cvtColor(imagen, cv2.COLOR_BGR2RGB))
-plt.axis("off")
+        plt.subplot(3, 4, 1)
+        plt.title("Imagen Original")
+        plt.imshow(cv2.cvtColor(self.imagen, cv2.COLOR_BGR2RGB))
+        plt.axis("off")
 
-for i, (imagen_filtrada, f) in enumerate(zip(imagenes_pasa_bajas, frecuencias_corte), start=2):
-    plt.subplot(3, 4, i)
-    plt.title(f"Filtro Pasa Bajas (corte = {f})")
-    plt.imshow(cv2.cvtColor(imagen_filtrada.astype(np.uint8), cv2.COLOR_BGR2RGB))
-    plt.axis("off")
+        for i, (imagen_filtrada, f) in enumerate(zip(imgs_pasa_bajas, frec_corte), start=2):
+            plt.subplot(3, 4, i)
+            plt.title(f"Filtro Pasa Bajas (corte = {f})")
+            plt.imshow(cv2.cvtColor(imagen_filtrada.astype(np.uint8), cv2.COLOR_BGR2RGB))
+            plt.axis("off")
 
-for i, (imagen_filtrada, f) in enumerate(zip(imagenes_pasa_altas, frecuencias_corte), start=6):
-    plt.subplot(3, 4, i + 4)
-    plt.title(f"Filtro Pasa Altas (corte = {f})")
-    plt.imshow(cv2.cvtColor(imagen_filtrada.astype(np.uint8), cv2.COLOR_BGR2RGB))
-    plt.axis("off")
+        for i, (imagen_filtrada, f) in enumerate(zip(imgs_pasa_altas, frec_corte), start=6):
+            plt.subplot(3, 4, i + 4)
+            plt.title(f"Filtro Pasa Altas (corte = {f})")
+            plt.imshow(cv2.cvtColor(imagen_filtrada.astype(np.uint8), cv2.COLOR_BGR2RGB))
+            plt.axis("off")
 
-plt.tight_layout()
-plt.show()
+        #plt.tight_layout()
+        #plt.show()
+        
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+        plt.close()
+        
+        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+        return img_base64

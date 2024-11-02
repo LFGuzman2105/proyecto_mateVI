@@ -1,16 +1,28 @@
 <div class="container">
     <div class="fft">
-        <form [formGroup]="imageForm" (ngSubmit)="onSubmit()" action="">
+        <form (ngSubmit)="onSubmit()">
             <div>
-                <div>
-                    <label for="fileUpload">Seleccione la imagen que quiere procesar</label>
+                <div class="">
+                    <label for="img">Seleccione la imagen que quiere procesar</label>
                 </div>
-                <input type="file" (change)="onFileSelect($event)" >
+                <mat-form-field>
+                    <mat-label>Imagen</mat-label>
+                    <mat-select [(ngModel)]="selectedimg" name="img">
+                    @for (img of images; track img) {
+                        <mat-option [value]="img.value">{{img.name}}</mat-option>
+                    }
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="button-group">
                 <button mat-raised-button type="submit" >Procesar Imagen</button>
-                <button mat-raised-button color="warn">Resetear</button>
+                <button mat-raised-button color="warn" type="button" (click)="reset()">Resetear</button>
             </div>
         </form>
+    </div>
+    <div class="fft">
+        @if (filtered_images) {
+            <img src="{{ filtered_images }}" alt="Imagenes Filtradas" style="width: 100%;">
+        }
     </div>
 </div>
